@@ -19,6 +19,8 @@ BuildRequires:  perl(strict)
 BuildRequires:  perl(Test::FailWarnings)
 BuildRequires:  perl(Test::More) >= 0.96
 BuildRequires:  perl(warnings)
+BuildRequires:  perl(cpan)
+BuildRequires:  perl(Dist::Zilla)
 Requires:       perl(Log::Any)
 Requires:       perl(Moo::Role)
 Requires:       perl(strict)
@@ -34,6 +36,7 @@ implementation or destination.
 %setup -q -n MooX-Role-Logger-%{version}
 
 %build
+cpan `dzil authordeps`
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 make %{?_smp_mflags}
 
