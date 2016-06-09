@@ -19,7 +19,7 @@ BuildRequires:  perl(strict)
 BuildRequires:  perl(Test::FailWarnings)
 BuildRequires:  perl(Test::More) >= 0.96
 BuildRequires:  perl(warnings)
-BuildRequires:  perl(cpan)
+BuildRequires:  perl(CPAN)
 BuildRequires:  perl(Dist::Zilla)
 Requires:       perl(Log::Any)
 Requires:       perl(Moo::Role)
