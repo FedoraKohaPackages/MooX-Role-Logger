@@ -3,17 +3,17 @@ use warnings;
 
 package MooX::Role::Logger;
 # ABSTRACT: Provide logging via Log::Any
-# VERSION
+our $VERSION = '0.005'; # VERSION
 
 use Moo::Role;
 
 use Log::Any ();
 
-=method _logger
-
-Returns a logging object.  See L<Log::Any> for a list of logging methods it accepts.
-
-=cut
+#pod =method _logger
+#pod
+#pod Returns a logging object.  See L<Log::Any> for a list of logging methods it accepts.
+#pod
+#pod =cut
 
 has _logger => (
     is       => 'lazy',
@@ -28,19 +28,36 @@ sub _build__logger {
 
 has _logger_category => ( is => 'lazy', );
 
-=method _build__logger_category
-
-Override to set the category used for logging.  Defaults to the class name of
-the object (which could be a subclass).  You can override to lock it to a
-particular name:
-
-    sub _build__logger_category { __PACKAGE__ }
-
-=cut
+#pod =method _build__logger_category
+#pod
+#pod Override to set the category used for logging.  Defaults to the class name of
+#pod the object (which could be a subclass).  You can override to lock it to a
+#pod particular name:
+#pod
+#pod     sub _build__logger_category { __PACKAGE__ }
+#pod
+#pod =cut
 
 sub _build__logger_category { return ref $_[0] }
 
 1;
+
+
+# vim: ts=4 sts=4 sw=4 et:
+
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+MooX::Role::Logger - Provide logging via Log::Any
+
+=head1 VERSION
+
+version 0.005
 
 =head1 SYNOPSIS
 
@@ -122,31 +139,117 @@ Then in your other classes, use your custom role:
     use Moo;
     with 'MyLibrary::Role::Logger'
 
+=head1 METHODS
+
+=head2 _logger
+
+Returns a logging object.  See L<Log::Any> for a list of logging methods it accepts.
+
+=head2 _build__logger_category
+
+Override to set the category used for logging.  Defaults to the class name of
+the object (which could be a subclass).  You can override to lock it to a
+particular name:
+
+    sub _build__logger_category { __PACKAGE__ }
+
 =head1 SEE ALSO
 
 Since MooX::Role::Logger is universal, you have to use it with one of
 several L<Log::Any::Adapter> classes:
 
-=for :list
-* L<Log::Any::Adapter::File>
-* L<Log::Any::Adapter::Stderr>
-* L<Log::Any::Adapter::Stdout>
-* L<Log::Any::Adapter::ScreenColoredLevel>
-* L<Log::Any::Adapter::Dispatch>
-* L<Log::Any::Adapter::Syslog>
-* L<Log::Any::Adapter::Log4perl>
+=over 4
+
+=item *
+
+L<Log::Any::Adapter::File>
+
+=item *
+
+L<Log::Any::Adapter::Stderr>
+
+=item *
+
+L<Log::Any::Adapter::Stdout>
+
+=item *
+
+L<Log::Any::Adapter::ScreenColoredLevel>
+
+=item *
+
+L<Log::Any::Adapter::Dispatch>
+
+=item *
+
+L<Log::Any::Adapter::Syslog>
+
+=item *
+
+L<Log::Any::Adapter::Log4perl>
+
+=back
 
 These other logging roles are specific to particular logging packages, rather
 than being universal:
 
-=for :list
-* L<MooseX::LazyLogDispatch>
-* L<MooseX::Log::Log4perl>
-* L<MooseX::LogDispatch>
-* L<MooseX::Role::LogHandler>
-* L<MooseX::Role::Loggable> (uses L<Log::Dispatchouli>)
-* L<Role::Log::Syslog::Fast>
+=over 4
+
+=item *
+
+L<MooseX::LazyLogDispatch>
+
+=item *
+
+L<MooseX::Log::Log4perl>
+
+=item *
+
+L<MooseX::LogDispatch>
+
+=item *
+
+L<MooseX::Role::LogHandler>
+
+=item *
+
+L<MooseX::Role::Loggable> (uses L<Log::Dispatchouli>)
+
+=item *
+
+L<Role::Log::Syslog::Fast>
+
+=back
+
+=for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
+
+=head1 SUPPORT
+
+=head2 Bugs / Feature Requests
+
+Please report any bugs or feature requests through the issue tracker
+at L<https://github.com/dagolden/MooX-Role-Logger/issues>.
+You will be notified automatically of any progress on your issue.
+
+=head2 Source Code
+
+This is open source software.  The code repository is available for
+public review and contribution under the terms of the license.
+
+L<https://github.com/dagolden/MooX-Role-Logger>
+
+  git clone https://github.com/dagolden/MooX-Role-Logger.git
+
+=head1 AUTHOR
+
+David Golden <dagolden@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2013 by David Golden.
+
+This is free software, licensed under:
+
+  The Apache License, Version 2.0, January 2004
 
 =cut
-
-# vim: ts=4 sts=4 sw=4 et:
